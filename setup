@@ -1,7 +1,8 @@
 #!/bin/sh
 BINARY={BINARY-"./duck_tongue"}
 INSTALL_PATH=${INSTALL_PATH-"~/.local/bin"}
-MNESIA=${MNESIA-XDG_CONFIG_HOME}
+DEFAULT_MNESIA="$HOME/.config/duck_tongue/"
+DUCK_MNESIA=${MNESIA-DEFAULT_MNESIA}
 mix escript.build
 mv ./duck_tongue $BINARY
 mv $BINARY $INSTALL_PATH
