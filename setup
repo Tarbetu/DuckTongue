@@ -1,0 +1,10 @@
+#!/bin/sh
+BINARY={BINARY-"./duck_tongue"}
+INSTALL_PATH=${INSTALL_PATH-"~/.local/bin"}
+MNESIA=${MNESIA-XDG_CONFIG_HOME}
+mix escript.build
+mv ./duck_tongue $BINARY
+mv $BINARY $INSTALL_PATH
+chmod +x ./build_database
+./build_database
+mv "Mnesia*" $INSTALL_PATH

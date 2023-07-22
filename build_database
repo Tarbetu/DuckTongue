@@ -1,0 +1,2 @@
+#!/bin/sh
+mix amnesia.create -d "DuckTongue.Persistence" --disk
