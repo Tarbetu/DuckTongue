@@ -29,6 +29,6 @@ end
 
 mnesia_dir = System.get_env("DUCK_MNESIA")
 
-if mnesia_dir do
-  :application.set_env(:mnesia, :dir, ~c"#{mnesia_dir}")
+if mnesia_dir != "" do
+  :application.set_env(:mnesia, :dir, ~c"#{mnesia_dir}/DuckTongue/")
 end
