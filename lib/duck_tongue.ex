@@ -7,16 +7,10 @@ defmodule DuckTongue do
     word
     action
     definition
-    iso_code
   )a
-  def appname, do: "DuckTongue"
-
-  def os do
-    {family, _} = :os.type()
-    family
-  end
 
   def start(state) do
+    Memento.wait([Language, Word], 3000)
     {:ok, agent} = Agent.start_link(fn -> state end)
     agent
   end
@@ -27,7 +21,6 @@ defmodule DuckTongue do
       word: word,
       language: lang,
       definition: definition,
-      iso_code: iso_code
     } = state(agent)
 
     case action do
@@ -35,12 +28,15 @@ defmodule DuckTongue do
         {:ok, Dictionary.get_word(lang, word)}
 
       "put" ->
-        {:ok, Dictionary.put_word(lang, word, definition)}
+        with :ok <- Dictionary.put_word(lang, word, definition) do
+          {:ok, ""}
+        else
+          err -> err
+        end
 
       "create_language" ->
-        {:ok,
-         Dictionary.create_language(%Language{
-           iso_code: iso_code,
+        {:ok, Dictionary.create_language(%Language{
+           lang_code: lang,
            fullname: definition
          })}
 
@@ -48,10 +44,13 @@ defmodule DuckTongue do
         {:ok, Server.start()}
 
       "random" ->
-        {:ok, Dictionary.random()}
+        Dictionary.random()
 
-      _ ->
-        {:error, "Unknown Action!"}
+      "list" ->
+        Dictionary.list_languages()
+
+      action ->
+        {:error, "Unknown action: #{inspect(action)}"}
     end
   end
 

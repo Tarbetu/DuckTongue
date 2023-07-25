@@ -1,4 +1,4 @@
 #!/bin/sh
-DEFAULT_MNESIA="$HOME/.config/DuckTongue/"
-DUCK_MNESIA=${MNESIA-DEFAULT_MNESIA}
+DEFAULT_MNESIA="$HOME/.config/"
+DUCK_MNESIA=${DUCK_MNESIA-DEFAULT_MNESIA}
 mix escript.build && ./duck_tongue $@

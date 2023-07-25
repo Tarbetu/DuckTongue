@@ -22,13 +22,7 @@ defmodule DuckTongue.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:amnesia, "~> 0.2.8"}
+      {:memento, "~> 0.3.2"}
     ]
   end
-end
-
-mnesia_dir = System.get_env("DUCK_MNESIA")
-
-if mnesia_dir != "" do
-  :application.set_env(:mnesia, :dir, ~c"#{mnesia_dir}/DuckTongue/")
 end

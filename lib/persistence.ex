@@ -1,61 +1,57 @@
-use Amnesia
+defmodule DuckTongue.Persistence do
+  defmacro __using__(_opts) do
+    quote do
+      import DuckTongue.Persistence
+      alias DuckTongue.Persistence.{Language, Word}
+      alias Memento.{Query, Table}
+    end
+  end
+  alias Memento.Query
 
-mnesia_dir = System.get_env("DUCK_MNESIA")
-
-if mnesia_dir != "" do
-  :application.set_env(:mnesia, :dir, ~c"#{mnesia_dir}/DuckTongue/")
-end
-
-defdatabase DuckTongue.Persistence do
-  deftable(Language)
-
-  deftable Word,
-           [
-             {:id, autoincrement},
-             :language_id,
+  defmodule Word do
+    use Memento.Table,
+    attributes: [
              :word,
+             :lang_code,
              :definition
-           ],
-           type: :bag do
-    @type t :: %Word{
-            id: non_neg_integer,
-            language_id: non_neg_integer,
-            word: String.t(),
-            definition: String.t()
-          }
+    ],
+    index: [:lang_code],
+    type: :set
 
     def language(self) do
-      Language.read(self.language_id)
+      Query.read(Language, self.lang_code)
     end
   end
 
-  deftable Language,
-           [
-             :iso_code,
+  defmodule Language do
+    use Memento.Table,
+    attributes: [
+             :lang_code,
              :fullname
-           ],
-           type: :ordered_set do
-    @type t :: %Language{
-            iso_code: atom(),
-            fullname: String.t()
-          }
+    ],
+    type: :set
 
     def add_word(self, word, definition) do
       %Word{
-        language_id: self.id,
+        lang_code: self.lang_code,
         word: word,
         definition: definition
       }
-      |> Word.write()
+      |> Query.write()
     end
 
     def words(self) do
-      Word.read(self.id)
+      Query.select(Word, {:==, :lang_code, self.lang_code})
     end
 
     def get_word(self, word) do
       Language.words(self)
       |> Enum.filter(&(&1.word == word))
+    end
+
+    def has_word(self) do
+      Language.words(self)
+      |> Enum.any?
     end
   end
 end
