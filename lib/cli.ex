@@ -48,7 +48,7 @@ defmodule DuckTongue.CLI do
           IO.puts("")
       end
     else
-      {:error, error_message} -> IO.puts("ERR at #{action}: #{error_message}")
+      {:error, error_message} -> IO.puts("ERR at #{inspect(action)}: #{inspect(error_message)}")
     end
   end
 

@@ -45,8 +45,16 @@ defmodule DuckTongue.Persistence do
     end
 
     def get_word(self, word) do
-      Language.words(self)
-      |> Enum.filter(&(&1.word == word))
+      Memento.transaction! fn ->
+        self = if is_binary(self) do
+          Query.read(Language, self)
+        else
+          self
+        end
+
+        Language.words(self)
+        |> Enum.filter(&(&1.word == word))
+      end
     end
 
     def has_word(self) do

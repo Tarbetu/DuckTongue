@@ -25,29 +25,35 @@ defmodule DuckTongue do
 
     case action do
       "get" ->
-        {:ok, Dictionary.get_word(lang, word)}
+        {:ok, Dictionary.get(:word, lang, word)}
 
       "put" ->
-        with :ok <- Dictionary.put_word(lang, word, definition) do
+        with :ok <- Dictionary.put(:word, lang, word, definition) do
           {:ok, ""}
         else
           err -> err
         end
+      "random" ->
+        Dictionary.random()
+
+      "list" ->
+        Dictionary.list(:language)
+
+      "remove" ->
+        if lang || not word do
+          {Dictionary.remove(:language, lang), ""}
+        else
+          {Dictionary.remove(:word, lang, word), ""}
+        end
 
       "create_language" ->
-        {:ok, Dictionary.create_language(%Language{
+        {:ok, Dictionary.create(:language, %Language{
            lang_code: lang,
            fullname: definition
          })}
 
       "server" ->
         {:ok, Server.start()}
-
-      "random" ->
-        Dictionary.random()
-
-      "list" ->
-        Dictionary.list_languages()
 
       action ->
         {:error, "Unknown action: #{inspect(action)}"}
