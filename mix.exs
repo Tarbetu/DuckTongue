@@ -15,14 +15,16 @@ defmodule DuckTongue.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:memento, "~> 0.3.2"}
+      {:memento, "~> 0.3.2"},
+      {:plug_cowboy, "~> 2.5"},
+      {:jason, "~> 1.3"}
     ]
   end
 end

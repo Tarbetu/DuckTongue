@@ -38,8 +38,8 @@ defmodule DuckTongue.CLI do
         "create_language" ->
           "Created: #{option[:language]} - #{option[:definition]}"
 
-        "server" ->
-          IO.puts("Server started on port 4444")
+        # "server" ->
+        #   IO.puts("Server started on port 4444")
 
         "list" ->
           print_languages(value)
