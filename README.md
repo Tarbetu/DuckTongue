@@ -1,7 +1,7 @@
 # DuckTongue
 (You might check the Video Demo: URLHERE)
 
-** Behold! This is DuckTongue! The ultimate dictionary of the Duck!**
+**Behold! This is DuckTongue! The ultimate dictionary of the Duck!**
 ![Our Holy Duck of David Malan](duck.jpg)
 
 Hai! This is my final project for CS50.
@@ -124,11 +124,12 @@ cd duck_tongue
 sh ./setup
 ```
 To specialize the behavior of the `./setup` script, you might change the environment variables listed as below:
-- INSTALL_PATH: The place where the binary placed. Default: "$HOME/.local/bin"
-- DUCK_MNESIA: The place where the database stored. Default: "$HOME/.config" (will create DuckTongue subfolder)
+- `INSTALL_PATH`: The place where the binary placed. Default: "$HOME/.local/bin"
+- `DUCK_MNESIA`: The place where the database stored. Default: "$HOME/.config" (will create DuckTongue subfolder)
 
 ## Some advice!
-You can add this application to your `.bashrc`, so you can see a random word from DuckTongue when you open your (bash) shell.
+You can add this application to your `.bashrc`, so you can see a random word from DuckTongue when you open your (bash) shell. Example:
+```echo "duck_tongue" > ~/.bashrc```
 
 If you're fan of `fish` like me, you may use this command:
 ```fish
