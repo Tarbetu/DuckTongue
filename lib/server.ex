@@ -27,6 +27,8 @@ defmodule DuckTongue.Server do
         The server on port #{port} is down!
         Reason: #{msg}
         """)
+
+      other -> IO.inspect("#{other}")
     end
   end
 
