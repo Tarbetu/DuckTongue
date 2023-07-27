@@ -2,6 +2,7 @@ defmodule DuckTongue do
   use DuckTongue.Persistence
   alias DuckTongue.Dictionary
   alias DuckTongue.Server
+
   defstruct ~w(
     language
     word

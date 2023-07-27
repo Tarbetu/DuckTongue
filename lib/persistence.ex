@@ -9,6 +9,7 @@ defmodule DuckTongue.Persistence do
   alias Memento.Query
 
   defmodule Word do
+    @derive {Jason.Encoder, except: [:__meta__]}
     use Memento.Table,
     attributes: [
              :word,
@@ -24,6 +25,7 @@ defmodule DuckTongue.Persistence do
   end
 
   defmodule Language do
+    @derive {Jason.Encoder, except: [:__meta__]}
     use Memento.Table,
     attributes: [
              :lang_code,

@@ -1,5 +1,6 @@
 defmodule DuckTongue.Server do
   use Plug.Router
+  import DuckTongue
 
   plug(Plug.Logger)
   plug(:match)
@@ -33,6 +34,24 @@ defmodule DuckTongue.Server do
   end
 
   match _ do
-    send_resp(conn, 200, "Welcome!")
+    body = for {key, val} <- conn.body_params, into: %{} do
+      {String.to_atom(key), val}
+    end
+
+    result = struct(DuckTongue, body)
+    |> start()
+    |> process()
+    |> jsonize_result()
+
+    send_resp(conn, 200, result)
+  end
+
+  def jsonize_result(process_result) do
+    {result, msg} = process_result
+    {:ok, json} = Jason.encode %{
+      result: result,
+      content: msg
+    }
+    json
   end
 end
