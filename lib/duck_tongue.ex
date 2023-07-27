@@ -57,7 +57,7 @@ defmodule DuckTongue do
         {:ok, Server.start()}
 
       action ->
-        {:error, "Unknown action: #{inspect(action)}"}
+        {:error, "Unknown action: #{action}"}
     end
   end
 

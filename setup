@@ -1,10 +1,11 @@
 #!/bin/sh
-BINARY={BINARY-"./duck_tongue"}
+BINARY=${BINARY-"./duck_tongue"}
 INSTALL_PATH=${INSTALL_PATH-"$HOME/.local/bin"}
 DEFAULT_MNESIA="$HOME/.config/"
 DUCK_MNESIA=${MNESIA-DEFAULT_MNESIA}
-mix escript.build
-mv ./duck_tongue $BINARY
-mv $BINARY $INSTALL_PATH
+
+mix escript.build &&
+chmod +x $BINARY &&
+mkdir -p $INSTALL_PATH &&
+mv $BINARY $INSTALL_PATH &&
 mix create_database
-mv "Mnesia*" $INSTALL_PATH
