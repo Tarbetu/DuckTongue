@@ -9,7 +9,7 @@ Hai! This is my final project for CS50.
 With DuckTongue, you can store different words from the different languages via CLI or JSON API.
 
 ## The Actions
-The logic is simply, you will send a name of action and the application will the job.
+The logic is simply, you will send a name of action and the application will perform the action.
 
 <table>
 <thead>
@@ -28,22 +28,22 @@ The logic is simply, you will send a name of action and the application will the
   <tr>
     <th>get</th>
     <td>Gets a word from database</td>
-    <td>language, word, definition</td>
+    <td>language (l), word (w), definition (d)</td>
   </tr>
   <tr>
     <th>put</th>
     <td>Puts a word from database</td>
-    <td>language, word</td>
+    <td>language (l), word (w)</td>
   </tr>
   <tr>
     <th>remove</th>
     <td>Removes a word or language from database</td>
-    <td>language, word (can be ignored if you want to remove whole language)</td>
+    <td>language (l), word (w, can be ignored if you want to remove whole language)</td>
   </tr>
   <tr>
     <th>create_language</th>
     <td>Creates a language</td>
-    <td>language, definition</td>
+    <td>language (l), definition(d)</td>
   </tr>
   <tr>
     <th>list</th>
@@ -63,7 +63,7 @@ The template:
 ```sh
 duck_tongue action [parameters]
 ```
-You might choose an action from table, and you can pass their parameters like `-definition=foo` or `-d=foo`.
+Choose an action from table, and pass their parameters like `-definition=foo` or `-d=foo`.
 
 Some example:
 
@@ -75,7 +75,7 @@ duck_tongue create_language -l="tr" -d="Türkçe"
 # Check the languages
 duck_tongue list # no parameter!
 # Add new words, "w" for "word" and you can use "--word" instead of "-w"
-duck_tongue put -l="eo" -w="Esperi" -d="Hope - The belief or expectation that something wished for can or will happen"
+duck_tongue put -l="eo" -w="Libereco" -d="Freedom - The state of being free, of not being imprisoned or enslaved."
 # Get the word
 duck_tongue get -l="eo" -w="Esperi"
 # You can remove languages
@@ -91,7 +91,7 @@ duck_tongue server
 ```
 
 ## The JSON API
-Instead of good old CLI, you can use the API. The API has an endpoint ("/") and you send JSON requests like this:
+Instead of good old CLI, you may use the API. The API has an endpoint ("/") and you send JSON requests like this:
 ```Json
 {
   "action": "put",
@@ -99,26 +99,26 @@ Instead of good old CLI, you can use the API. The API has an endpoint ("/") and 
   "definition": "Elixir - An elixir is a sweet liquid used for medical purposes, to be taken orally and intended to cure one's illness."
 }
 ```
-The default port is `4444`. You can change the port by setting the DUCK_PORT environmental variable like this:
+The default port is `4444`. You may change the port by setting the DUCK_PORT environmental variable like this:
 ```sh
 DUCK_PORT=1234 duck_tongue server
 ```
 ## Building && Installation
-__Note: This installation is Unix specific__
+__Note: This installation script and instructions are Unix specific__
 
-You will need to install `elixir`, the compiler of Elixir programming language and `mix`, the package manager.
+You will need to install `elixir`, the compiler of Elixir programming language, and `mix`, the package manager.
 
 You can check the installation page of Elixir:
 https://elixir-lang.org/install.html
 
 The `mix` executable should be installed with Elixir.
 
-After that, clone this repository. You can directly download from Github or run this command:
+After installing Elixir, clone this repository. You can directly download from Github or run this command:
 ```sh
 git clone https://github.com/Tarbetu/duck_tongue.git
 ```
 
-After that, you can use this command to install DuckTongue:
+Then, use this command to install DuckTongue:
 ```sh
 cd duck_tongue
 sh ./setup
@@ -135,3 +135,5 @@ If you're fan of `fish` like me, you may use this command:
 ```fish
 function fish_greeting; duck_tongue; end && funcsave fish_greeting
 ```
+
+However, note that this application needs a bit of time to warm-up, so you might find it as a bit slow.
