@@ -1,5 +1,5 @@
 # DuckTongue
-(You might check the Video Demo: URLHERE)
+(You might check the video: https://youtu.be/jg7NFsrKToI)
 
 **Behold! This is DuckTongue! The ultimate dictionary of the Duck!**
 ![Our Holy Duck of David Malan](duck.jpg)
